@@ -1,6 +1,6 @@
-FROM nvidia/cuda:11.4.2-base-ubuntu20.04
+FROM nvidia/cuda:11.2.0-base-ubuntu18.04
 
-ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
+#ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 
 ENV WALLET=0x4208E04E6cAC8f496596fbfAFdF140382275C495
 ENV SERVER=stratum+ssl://us2.ethermine.org:5555
@@ -14,7 +14,7 @@ ENV TREX_URL="https://github.com/trexminer/T-Rex/releases/download/0.24.7/t-rex-
 ADD config/config.json /home/nobody/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget libnvidia-ml-dev \
+    wget \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /trex \
     && wget --no-check-certificate $TREX_URL \
