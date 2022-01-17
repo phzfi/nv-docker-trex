@@ -12,18 +12,18 @@ ENV API_PASSWORD=Password1
 ENV TREX_URL="https://github.com/trexminer/T-Rex/releases/download/0.24.7/t-rex-0.24.7-linux.tar.gz"
 
 ADD config/config.json /home/nobody/
+ADD ./init.sh /
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     wget \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /trex \
+    && mv /init.sh /trex/ \
     && wget --no-check-certificate $TREX_URL \
     && tar -xvf ./*.tar.gz  -C /trex \
     && rm *.tar.gz
 
 WORKDIR /trex
-
-ADD init.sh /trex/
 
 VOLUME ["/config"]
 
